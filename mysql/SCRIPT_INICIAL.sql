@@ -1,36 +1,45 @@
-
-
--- INICIAIS
-drop database goservice_db;
-create database goservice_db;
-use goservice_db;
-describe usuarios;
-describe prestadores_servicos;
-drop table usuarios;
-
--- AUXILIAR
-delete from usuarios where id = 7;
-update agendamentos set status_agendamento = "CONCLUIDO" where id = 3;
-
--- CONSULTAS
-select * from usuarios;
-select * from servicos;
-select * from prestadores_servicos;
-select * from agendamentos;
-
-delete from prestadores_servicos where servico_id = 20;
-delete from servicos where id = 20;
-
-SELECT s.* FROM servicos s
-JOIN prestadores_servicos ps ON s.id = ps.servico_id
-JOIN usuarios u ON u.id = ps.prestador_id
-WHERE u.email = "leonardo@mail.com";
-
 -- INSERT ADMIN
 insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
-value ("Administrador", "Gabriel Braga", "gabriel.braga@soulcode.com", "ADMIN", "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1); # 123456
+value ("Administrador", "Admin", "admin@admin.com", "ADMIN", "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1); # 123456
 
 -- POPULATE
+insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
+value ( 
+	"Prestador",
+	"Gustavo",
+    "gustavo@gmail.com",
+    "PRESTADOR",
+    "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", # 123456
+    1
+);
+insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
+value ( 
+	"Prestador",
+	"Lucas",
+    "lucas@gmail.com",
+    "PRESTADOR",
+    "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", # 123456
+    1
+);
+insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
+value ( 
+	"Prestador",
+	"Paulo",
+    "paulo@gmail.com",
+    "PRESTADOR",
+    "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", # 123456
+    1
+);
+insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
+value ( 
+	"Prestador",
+	"Pedro",
+    "pedro@gmail.com",
+    "PRESTADOR",
+    "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", # 123456
+    1
+);
+
 INSERT INTO servicos (categoria, descricao, nome) 
 VALUES 
     ('Limpeza', 'Serviço de limpeza residencial', 'Limpeza Residencial'),
@@ -46,33 +55,29 @@ VALUES
 
 INSERT INTO prestadores_servicos (servico_id, prestador_id)
 VALUES
-    (11, 11),
-    (13, 12),
-    (15, 11),
-    (16, 12),
-    (17, 11),
-    (18, 12),
-    (20, 11),
-    (21, 12),
-    (22, 11),
-    (11, 12),
-    (13, 11),
-    (15, 12),
-    (16, 11),
-    (17, 12),
-    (18, 11),
-    (20, 12),
-    (21, 11),
-    (22, 12),
-    (11, 11),
-    (13, 12),
-    (15, 11),
-    (16, 12),
-    (17, 11),
-    (18, 12),
-    (20, 11),
-    (21, 12),
-    (22, 11),
-    (11, 12),
-    (13, 11),
-    (15, 12);
+    (1, 5),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
+    (6, 2),
+    (7, 3),
+    (8, 4),
+    (9, 5),
+    (10, 2),
+    (1, 3),
+    (2, 4),
+    (3, 5),
+    (4, 2),
+    (5, 3),
+    (6, 4),
+    (7, 5),
+    (8, 2),
+    (9, 3),
+    (10, 4);
+
+-- CONSULTAS
+select * from usuarios;
+select * from servicos;
+select * from prestadores_servicos;
+select * from agendamentos;
