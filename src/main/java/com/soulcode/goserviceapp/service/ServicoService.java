@@ -5,6 +5,8 @@ import com.soulcode.goserviceapp.repository.ServicoRepository;
 import com.soulcode.goserviceapp.service.exceptions.ServicoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,11 @@ public class ServicoService {
     public List<Servico> findAll(){
         System.err.println("BUSCANDO NO BANCO DE DADOS...");
         return servicoRepository.findAll();
+    }
+
+    public Page<Servico> findAll(Pageable pageable){
+        System.err.println("BUSCANDO NO BANCO DE DADOS PAGINADO...");
+        return servicoRepository.findAll(pageable);
     }
 
     public Servico createServico(Servico servico){
