@@ -5,6 +5,7 @@ import com.soulcode.goserviceapp.domain.Usuario;
 import com.soulcode.goserviceapp.domain.enums.Perfil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public interface ServicoRepository extends JpaRepository<Servico, Long> {
     @Query(value = "SELECT status, COUNT(status) " +
             "FROM servicos GROUP BY status", nativeQuery = true)
     List<Servico> countServicesByStatus(Servico sevicos);
+
+    @Query(value = "SELECT * FROM servicos LIMIT :pageSize OFFSET :offset", nativeQuery = true)
+    List<Servico> findAllPaginated(@Param("pageSize") int pageSize, @Param("offset") int offset);
+
 }
 
 
