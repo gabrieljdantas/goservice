@@ -154,4 +154,9 @@ public class AdministradorController {
         }
         return mv;
     }
+
+
+    @GetMapping @GetMapping(value = "/servicos")
+    public ModelAndView servicos(@RequestParam(name = "filtro", required = false) String filtro) {
+        ModelAndView mv = new ModelAndView("servicosAdmin");
 }
