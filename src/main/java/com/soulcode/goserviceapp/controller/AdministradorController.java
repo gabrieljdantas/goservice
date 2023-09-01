@@ -32,11 +32,16 @@ public class AdministradorController {
     @Autowired
     private UsuarioLogService usuarioLogService;
 
+    @GetMapping("/servicos")
+    public ModelAndView servicos() {
+        return servicos(0);
+    }
+
     @GetMapping(value = "/servicos/{page}")
-    public ModelAndView servicos(@PathVariable int page) {
+    public ModelAndView servicos(@PathVariable(name = "page", required = false) Integer page) {
         ModelAndView mv = new ModelAndView("servicosAdmin");
         try {
-            int pageSize = 3;
+            int pageSize = 10;
             Pageable pageable = PageRequest.of(page, pageSize);
             Page<Servico> servicos = servicoService.findAll(pageable);
             mv.addObject("servicos", servicos);
