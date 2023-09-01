@@ -38,9 +38,14 @@ public class AdministradorController {
     public ModelAndView servicos(@PathVariable(name = "page", required = false) Integer page) {
         ModelAndView mv = new ModelAndView("servicosAdmin");
         try {
-            int pageSize = 3;
+            int pageSize = 10;
+            long totalServicos = servicoService.countTotalServicos();
+            int totalPages = (int) Math.ceil((double) totalServicos / pageSize);
+            System.out.println(totalPages);
             List<Servico> servicos = servicoService.findAll(page, pageSize);
             mv.addObject("servicos", servicos);
+            mv.addObject("currentPage", page);
+            mv.addObject("totalPages", totalPages);
         } catch (Exception ex) {
             mv.addObject("errorMessage", "Erro ao paginar serviços");
         }
