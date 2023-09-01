@@ -1,0 +1,9 @@
+footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #808080; /* Cor de fundo do rodapé, se desejar */
+        padding: 0px; /* Espaçamento interno para o conteúdo do rodapé */
+        text-align: center; /* Alinhamento do texto no centro */
+    }
