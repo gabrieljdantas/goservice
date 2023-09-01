@@ -28,6 +28,9 @@ public interface ServicoRepository extends JpaRepository<Servico, Long> {
     @Query(value = "SELECT * FROM servicos LIMIT :pageSize OFFSET :offset", nativeQuery = true)
     List<Servico> findAllPaginated(@Param("pageSize") int pageSize, @Param("offset") int offset);
 
+
+    @Query(value = "SELECT COUNT(*) FROM servicos", nativeQuery = true)
+    long countTotalServicos();
 }
 
 

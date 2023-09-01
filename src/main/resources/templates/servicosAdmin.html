@@ -54,6 +54,18 @@
             <div class="card-body">
                 <h5 class="card-title mb-2">Serviços cadastrados</h5>
 
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        <li class="page-item" th:class="${currentPage > 0} ? '' : 'disabled'">
+                            <a class="page-link" th:href="'/admin/servicos/' + ${currentPage - 1}">Previous</a>
+                        </li>
+
+                        <li class="page-item" th:class="${currentPage >= totalPages - 1} ? 'disabled' : ''">
+                            <a class="page-link" th:href="'/admin/servicos/' + ${currentPage + 1}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+
                 <table class="table w-100">
                     <thead>
                     <tr>

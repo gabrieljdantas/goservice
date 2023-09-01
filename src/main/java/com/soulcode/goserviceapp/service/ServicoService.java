@@ -56,4 +56,8 @@ public class ServicoService {
     public List<Servico> findByPrestadorEmail(String email) {
         return servicoRepository.findByPrestadorEmail(email);
     }
+
+    public long countTotalServicos() {
+        return servicoRepository.countTotalServicos();
+    }
 }
