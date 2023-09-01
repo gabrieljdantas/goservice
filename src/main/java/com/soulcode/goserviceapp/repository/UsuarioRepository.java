@@ -23,5 +23,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "UPDATE usuarios u SET u.habilitado = ? WHERE u.id = ?", nativeQuery = true)
     void updateEnableById(boolean habilitado, Long id);
 
-
+    @Query(value= "SELECT perfil, COUNT(perfil) " +
+            " FROM usuarios GROUP BY perfil ", nativeQuery = true)
+    List<Usuario> countUsersByProfile(Perfil perfil);
 }
