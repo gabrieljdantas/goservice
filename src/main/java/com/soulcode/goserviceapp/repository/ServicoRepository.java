@@ -21,9 +21,6 @@ public interface ServicoRepository extends JpaRepository<Servico, Long> {
                     " WHERE u.email = ?", nativeQuery = true)
     List<Servico> findByPrestadorEmail(String email);
 
-    @Query(value = "SELECT status, COUNT(status) " +
-            "FROM servicos GROUP BY status", nativeQuery = true)
-    List<Servico> countServicesByStatus(Servico sevicos);
 
     @Query(value = "SELECT * FROM servicos LIMIT :pageSize OFFSET :offset", nativeQuery = true)
     List<Servico> findAllPaginated(@Param("pageSize") int pageSize, @Param("offset") int offset);
