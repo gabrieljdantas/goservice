@@ -2,43 +2,22 @@
 insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
 value ("Administrador", "Admin", "admin@admin.com", "ADMIN", "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1); # 123456
 
--- POPULATE
+-- POPULATE PRESTADOR
 insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
-value ( 
-	"Prestador",
-	"Gustavo",
-    "gustavo@gmail.com",
-    "PRESTADOR",
-    "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", # 123456
-    1
-);
+value ("Prestador","Gustavo","gustavo@gmail.com","PRESTADOR","$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1), # 123456
+	("Prestador", "Lucas", "lucas@gmail.com", "PRESTADOR", "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1), # 123456
+	("Prestador", "Paulo", "paulo@gmail.com", "PRESTADOR", "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1),  # 123456
+	("Prestador", "Pedro", "pedro@gmail.com", "PRESTADOR", "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1);  # 123456
+
+-- POPULATE CLIENTE
 insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
-value ( 
-	"Prestador",
-	"Lucas",
-    "lucas@gmail.com",
-    "PRESTADOR",
-    "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", # 123456
-    1
-);
-insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
-value ( 
-	"Prestador",
-	"Paulo",
-    "paulo@gmail.com",
-    "PRESTADOR",
-    "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", # 123456
-    1
-);
-insert into usuarios (dtype, nome, email, perfil, senha, habilitado)
-value ( 
-	"Prestador",
-	"Pedro",
-    "pedro@gmail.com",
-    "PRESTADOR",
-    "$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", # 123456
-    1
-);
+value ("Cliente","Ryan","ryan@gmail.com","CLIENTE","$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1), # 123456
+	("Cliente","Gabriel Jesus","g.jesus@gmail.com","CLIENTE","$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1), # 123456
+	("Cliente","Beatriz","beatriz@gmail.com","CLIENTE","$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1), # 123456
+	("Cliente","Vinicius","spilla@gmail.com","CLIENTE","$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1), # 123456
+    ("Cliente","Carlos Eduardo","carlosed@gmail.com","CLIENTE","$2a$10$r3r9V682sIhE/61jZjqkauT.08pxrBx.GE1T.yEogN5r8Ly2S8eTK", 1); # 123456
+
+
 
 INSERT INTO servicos (categoria, descricao, nome) 
 VALUES 
