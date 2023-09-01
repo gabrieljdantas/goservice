@@ -9,9 +9,6 @@ import com.soulcode.goserviceapp.service.UsuarioService;
 import com.soulcode.goserviceapp.service.exceptions.ServicoNaoEncontradoException;
 import com.soulcode.goserviceapp.service.exceptions.UsuarioNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,12 +38,11 @@ public class AdministradorController {
     public ModelAndView servicos(@PathVariable(name = "page", required = false) Integer page) {
         ModelAndView mv = new ModelAndView("servicosAdmin");
         try {
-            int pageSize = 10;
-            Pageable pageable = PageRequest.of(page, pageSize);
-            Page<Servico> servicos = servicoService.findAll(pageable);
+            int pageSize = 3;
+            List<Servico> servicos = servicoService.findAll(page, pageSize);
             mv.addObject("servicos", servicos);
         } catch (Exception ex) {
-            mv.addObject("errorMessage", ex.getMessage());
+            mv.addObject("errorMessage", "Erro ao paginar serviços");
         }
         return mv;
     }
