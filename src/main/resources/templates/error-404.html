@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<head>
+    <meta charset="UTF-8">
+    <title>Goservice - 404 </title>
+</head>
+<body>
+    <div id="content">
+        <div th:replace="fragments/header :: header"></div>
+        <div class="container my-4">
+            <h1>Error 404</h1>
+            <h2>A pagina não foi encontrada, confira a URL inserida e tente novamente</h2>
+        </div>
+        <footer th:replace="fragments/footer :: footer"></footer>
+    </div>
+</body>
+</html>

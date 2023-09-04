@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<head>
+    <meta charset="UTF-8">
+    <title>Go Service - Error</title>
+</head>
+<body>
+<div id="content">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container my-4">
+        <h1>Something went wrong! </h1>
+        <h2>Our Engineers are on it</h2>
+    </div>
+    <footer th:replace="fragments/footer :: footer"></footer>
+</div>
+</body>
+</html>

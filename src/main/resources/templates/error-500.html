@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<head>
+    <meta charset="UTF-8">
+    <title>GoService - 500</title>
+</head>
+<body>
+    <div id="content">
+        <div th:replace="fragments/header :: header"></div>
+        <div class="container my-4">
+            <h1>Error 500</h1>
+            <h2>Estamos com problemas na estrutura do site, a equipe GoService ja esta resolvendo. Tente novamente mais tarde.</h2>
+        </div>
+        <footer th:replace="fragments/footer :: footer"></footer>
+    </div>
+</body>
+</html>

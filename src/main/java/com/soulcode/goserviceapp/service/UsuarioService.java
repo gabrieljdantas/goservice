@@ -84,7 +84,7 @@ public class UsuarioService {
             return;
         }
         throw new UsuarioNaoEncontradoException();
-     }
+    }
     @Transactional
     public void enableUser(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
