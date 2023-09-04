@@ -1,0 +1,16 @@
+.ContainerCarousel{
+    max-width: 100%;
+}
+
+.tittle-slides{
+    margin-top: 21px;
+    margin: 21px;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 2rem;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 255, 0.1); /* Sombra azul */
+}
