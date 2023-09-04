@@ -17,6 +17,20 @@
                 <div th:if="${successMessage != null}" th:text="${successMessage}" class="alert alert-success" role="alert"></div>
                 <div th:if="${errorMessage != null}" th:text="${errorMessage}" class="alert alert-danger" role="alert"></div>
 
+                <form th:action="@{/agenda}" method="get">
+                    <label for="dataInicio">Data de Início:</label>
+                    <input type="date" id="dataInicio" name="dataInicio" required>
+
+                    <label for="dataFim">Data de Fim:</label>
+                    <input type="date" id="dataFim" name="dataFim" required>
+
+                    <button type="submit">Filtrar</button>
+                </form>
+
+                <tr th:each="agendamento : ${agenda}">
+                    <td th:text="${#dates.format(agenda.data, 'yyyy/MM/dd')}"></td>
+                </tr>
+
                 <table class="table w-100">
                     <thead>
                     <tr>
