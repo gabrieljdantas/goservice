@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+    th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" media="screen" />
+<head>
+    <title>GoService | Dúvidas Frequentes</title>
+</head>
+
+<body>
+
+    <main id="content">
+        <div th:replace="fragments/header :: header"></div>
+        <h1 class="titulo">GOService: Desvendando as Dúvidas Comuns!</h1>
+
+        <div class="container-botoes"> <!-- CONTAINER DE PERGUNTAS -->
+            <p class="d-inline-flex gap-1">
+            <div class="row">
+
+
+                <!--BOTÃO 1 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-1"
+                    aria-expanded="false" aria-controls="btn-1">Como faço para me registrar na plataforma de
+                    serviços?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-1">
+                        <div class="cardFaq">
+                            Para se registrar em nossa plataforma, clique na opção "Cadastre-se" no canto superior
+                            direito da página inicial. Siga as etapas fornecidas, que incluem a inserção de suas
+                            informações pessoais e de contato. Após concluir o registro, você terá acesso à nossa
+                            comunidade de serviços diversificados.
+                        </div>
+                    </div>
+                </div>
+
+                <!--BOTÃO 2 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-2"
+                    aria-expanded="false" aria-controls="btn-2">Quais áreas e setores de serviços são abrangidos pela
+                    plataforma?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-2">
+                        <div class="cardFaq">
+                            A nossa plataforma abrange uma ampla gama de serviços, desde áreas tradicionais, como
+                            construção e reforma, até setores mais especializados, como consultoria financeira e
+                            marketing digital. Nossa lista completa de categorias está disponível em nosso site,
+                            permitindo que você encontre o serviço específico de que necessita.
+                        </div>
+                    </div>
+                </div>
+
+                <!--BOTÃO 3 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-3"
+                    aria-expanded="false" aria-controls="btn-3"> Quais critérios para aprovar prestadores de serviços na
+                    plataforma?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-3">
+                        <div class="cardFaq">
+                            Mantemos um processo rigoroso de seleção de prestadores de serviços para garantir qualidade
+                            e confiabilidade. Isso inclui análise de experiência, verificação de antecedentes e
+                            avaliações dos serviços anteriores. Para obter detalhes completos sobre os critérios de
+                            aprovação, consulte nossa página "Torne-se um Prestador de Serviços.
+                        </div>
+                    </div>
+                </div>
+
+                <!--BOTÃO 4 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-4"
+                    aria-expanded="false" aria-controls="btn-4">Como a plataforma garante a segurança e qualidade dos
+                    serviços?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-4">
+                        <div class="cardFaq">
+                            Comprometemos recursos substanciais para assegurar segurança e excelência. Implementamos
+                            verificações rigorosas para nossos prestadores de serviços e coletamos feedback dos
+                            clientes. Nossa equipe de suporte especializada está pronta para resolver quaisquer
+                            problemas, garantindo que todos os serviços atinjam os mais elevados padrões.
+                        </div>
+                    </div>
+                </div>
+
+                <!--BOTÃO 5 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-5"
+                    aria-expanded="false" aria-controls="btn-5">Como posso entrar em contato com os prestadores de
+                    serviços?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-5">
+                        <div class="cardFaq">
+                            Os detalhes de contato de cada prestador de serviços estão disponíveis em seus perfis
+                            individuais na plataforma. Você pode se comunicar com eles através de mensagens internas,
+                            facilitando a troca de informações e esclarecimento de dúvidas antes de contratar um
+                            serviço.
+                        </div>
+                    </div>
+                </div>
+
+                <!--BOTÃO 6 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-6"
+                    aria-expanded="false" aria-controls="btn-6">Qual é o sistema de avaliação e feedback dos prestadores
+                    de serviços?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-6">
+                        <div class="cardFaq">
+                            Mantemos um sistema de avaliação robusto que permite aos clientes deixar feedback sobre os
+                            serviços recebidos. Essas avaliações e classificações são visíveis nos perfis dos
+                            prestadores, ajudando você a tomar decisões informadas ao escolher um serviço.
+                        </div>
+                    </div>
+                </div>
+                <!--BOTÃO 7 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-7"
+                    aria-expanded="false" aria-controls="btn-7"> Como posso contar com apoio se algo der errado com um
+                    serviço que contratei?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-7">
+                        <div class="cardFaq">
+                            Estamos à disposição para lidar com qualquer contratempo que possa surgir. Ao entrar em
+                            contato conosco, nossa equipe estará pronta para resolver a situação de forma eficaz,
+                            assegurando sua plena satisfação.
+                        </div>
+                    </div>
+                </div>
+
+                <!--BOTÃO 8 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-8"
+                    aria-expanded="false" aria-controls="btn-8">Qual é o procedimento caso eu decida cancelar um serviço
+                    que contratei?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-8">
+                        <div class="cardFaq">
+                            Se decidir cancelar um serviço, informe-nos o quanto antes. A nossa política de cancelamento
+                            está detalhada nos Termos e Condições disponíveis no site, onde você encontrará todas as
+                            diretrizes e prazos.
+                        </div>
+                    </div>
+                </div>
+
+                <!--BOTÃO 9 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-9"
+                    aria-expanded="false" aria-controls="btn-9">Qual é a política de preços e pagamento na
+                    plataforma?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-9">
+                        <div class="cardFaq">
+                            Os preços variam de acordo com o serviço e o prestador escolhido. Você pode encontrar
+                            informações detalhadas sobre os preços no perfil de cada prestador de serviços. Quanto ao
+                            pagamento, oferecemos opções seguras, como cartões de crédito e transferências bancárias,
+                            para sua conveniência.
+                        </div>
+                    </div>
+                </div>
+
+                <!--BOTÃO 10 -->
+                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-10"
+                    aria-expanded="false" aria-controls="btn-10">O que acontece se eu não ficar satisfeito com o serviço
+                    que contratei?</button>
+                <div class="col">
+                    <div class="collapse multi-collapse" id="btn-10">
+                        <div class="cardFaq">
+                            Se você não ficar satisfeito com um serviço, entre em contato conosco imediatamente. Estamos
+                            comprometidos em garantir sua satisfação e resolver qualquer problema que possa surgir.
+                            Nossa equipe de suporte estará à disposição para ajudar a encontrar uma solução adequada.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </p>
+        </div>
+        <footer th:replace="fragments/footer :: footer"></footer>
+    </main>
+</body>
+</html>
