@@ -9,11 +9,49 @@
 <main id="content">
     <div th:replace="fragments/header :: header"></div>
 
+        <h1 class="tittle-slides">DESCUBRA OS SERVIÇOS DA GOSERVICE E SAIBA MAIS SOBRE O QUE OFERECEMOS!</h1>
 
-    <!--STYLE-->
-    <div class="ContainerCard">
+    <!--CARROSEL-->
+        <div class="ContainerCarousel">
+
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button tcarype="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
 
 
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img th:src="@{/assets/img/banners/1.png}" class=" w-100" alt="Imagem 1">
+                    </div>
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img th:src="@{/assets/img/banners/2.png}" class=" w-100" alt="Imagem 1">
+                    </div>
+                    <div class="carousel-item active"  data-bs-interval="10000">
+                        <img th:src="@{/assets/img/banners/3.png}" class="w-100" alt="Imagem 1">
+                    </div>
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img th:src="@{/assets/img/banners/4.png}" class="w-100" alt="Imagem 1">
+                    </div>
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+
+            <!--STYLE-->
+            <div class="ContainerCard">
     <!--CARD 1-->
     <div class="card" style="width: 20rem;margin:10px 20px;display: inline-block;height: 560px; padding: 10px">
         <img th:src="@{/assets/img/prormos/1.png}" class="card-img-top" alt="...">
