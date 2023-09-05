@@ -1,10 +1,7 @@
 package com.soulcode.goserviceapp.domain;
 
 import com.soulcode.goserviceapp.domain.enums.Perfil;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
 import java.util.ArrayList;
@@ -13,7 +10,44 @@ import java.util.Objects;
 
 @Entity
 public class Prestador extends Usuario{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+
     private String descricao;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    @OneToOne
+    private Endereco endereco;
 
     @Min(value = 10, message = "O valor minimo de taxa cobrada por hora é 10.")
     private Float taxaPorHora;

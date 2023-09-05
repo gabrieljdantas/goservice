@@ -1,14 +1,50 @@
 package com.soulcode.goserviceapp.domain;
 
 import com.soulcode.goserviceapp.domain.enums.Perfil;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 public class Cliente extends Usuario{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+
+    @OneToOne
+    private Endereco endereco;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     private String telefone;
     @Column(length = 14)
     private String cpf;
