@@ -94,4 +94,14 @@ public class UsuarioService {
         }
         throw new UsuarioNaoEncontradoException();
     }
+
+
+    public List<Usuario> findByFilterName(String nome) {
+        List<Usuario> usuarios = usuarioRepository.findByFilterName(nome);
+
+        if (usuarios.isEmpty()) {
+            throw new UsuarioNaoEncontradoException("Nenhum usuário encontrado com o nome");
+        }
+        return usuarios;
+    }
 }

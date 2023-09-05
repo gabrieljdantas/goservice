@@ -101,18 +101,6 @@ public class AdministradorController {
         return "redirect:/admin/servicos";
     }
 
-    @GetMapping(value = "/usuarios")
-    public ModelAndView usuarios() {
-        ModelAndView mv = new ModelAndView("usuariosAdmin");
-        try {
-            List<Usuario> usuarios = usuarioService.findAll();
-            mv.addObject("usuarios", usuarios);
-        } catch (Exception ex) {
-            mv.addObject("errorMessage", "Erro ao buscar dados de usuários.");
-        }
-        return mv;
-    }
-
     @PostMapping(value = "/usuarios")
     public String createUser(Usuario usuario, RedirectAttributes attributes) {
         try {
@@ -160,4 +148,24 @@ public class AdministradorController {
         return mv;
     }
 
+
+    @GetMapping(value = "/usuarios")
+    public ModelAndView usuarios(@RequestParam(required = false) String nomeBuscar) {
+        ModelAndView mv = new ModelAndView("usuariosAdmin");
+        try {
+
+            if (nomeBuscar == null){
+                List<Usuario> usuarios = usuarioService.findAll();
+                mv.addObject("usuarios", usuarios);
+            }
+            else {
+                List<Usuario> usuariosFiltroNome = usuarioService.findByFilterName(nomeBuscar);
+                mv.addObject("usuarios", usuariosFiltroNome);
+            }
+
+        } catch (Exception ex) {
+            mv.addObject("errorMessage", "Erro ao buscar dados de usuários.");
+        }
+        return mv;
+    }
     }
