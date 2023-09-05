@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
-    th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+    th:replace="fragments/layout :: layout(~{::title}, ~{::#content}, ~{::#footer})">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" media="screen" />
 <head>
     <title>GoService | Dúvidas Frequentes</title>
@@ -149,12 +149,12 @@
                 </div>
 
                 <!--BOTÃO 10 -->
-                <button class="btnFaq" type="button" data-bs-toggle="collapse" data-bs-target="#btn-10"
+                <button class="btnFaq mb-5" type="button" data-bs-toggle="collapse" data-bs-target="#btn-10"
                     aria-expanded="false" aria-controls="btn-10">O que acontece se eu não ficar satisfeito com o serviço
                     que contratei?</button>
                 <div class="col">
                     <div class="collapse multi-collapse" id="btn-10">
-                        <div class="cardFaq">
+                        <div class="cardFaq mb-5">
                             Se você não ficar satisfeito com um serviço, entre em contato conosco imediatamente. Estamos
                             comprometidos em garantir sua satisfação e resolver qualquer problema que possa surgir.
                             Nossa equipe de suporte estará à disposição para ajudar a encontrar uma solução adequada.
@@ -165,7 +165,11 @@
             </div>
             </p>
         </div>
-        <footer th:replace="fragments/footer :: footer"></footer>
     </main>
+
+    <footer id="footer">
+        <div th:replace="fragments/footer :: footer"></div>
+    </footer>
+
 </body>
 </html>

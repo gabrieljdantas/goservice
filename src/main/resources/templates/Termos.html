@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content}, ~{::#footer})">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +47,9 @@
 
 </main>
 
-
+<footer id="footer">
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
 
 </body>
 </html>
