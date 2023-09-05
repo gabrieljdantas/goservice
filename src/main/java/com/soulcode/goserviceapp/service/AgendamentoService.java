@@ -53,14 +53,14 @@ public class AgendamentoService {
 
         return agendamentoRepository.save(agendamento);
     }
-    @Cacheable(cacheNames = "redisCache")
+//    @Cacheable(cacheNames = "redisCache")
     public List<Agendamento> findByCliente(Authentication authentication){
         System.err.println("BUSCANDO AGENDAMENTOS CLIENTE NO BANCO...");
         Cliente cliente = clienteService.findAuthenticated(authentication);
         return agendamentoRepository.findByClienteEmail(cliente.getEmail());
     }
-
-    @Cacheable(cacheNames = "redisCache")
+//
+//    @Cacheable(cacheNames = "redisCache")
     public List<Agendamento> findByPrestador(Authentication authentication){
         System.err.println("BUSCANDO AGENDAMENTOS PRESTADOR NO BANCO...");
         Prestador prestador = prestadorService.findAuthenticated(authentication);

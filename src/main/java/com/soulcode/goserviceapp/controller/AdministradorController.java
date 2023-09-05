@@ -29,11 +29,6 @@ public class AdministradorController {
     @Autowired
     private UsuarioLogService usuarioLogService;
 
-    @GetMapping("/servicos")
-    public ModelAndView servicos() {
-        return servicos(0);
-    }
-
     @GetMapping(value = "/servicos/{page}")
     public ModelAndView servicos(@PathVariable(name = "page", required = false) Integer page) {
         ModelAndView mv = new ModelAndView("servicosAdmin");
@@ -154,11 +149,10 @@ public class AdministradorController {
         ModelAndView mv = new ModelAndView("usuariosAdmin");
         try {
 
-            if (nomeBuscar == null){
+            if (nomeBuscar == null) {
                 List<Usuario> usuarios = usuarioService.findAll();
                 mv.addObject("usuarios", usuarios);
-            }
-            else {
+            } else {
                 List<Usuario> usuariosFiltroNome = usuarioService.findByFilterName(nomeBuscar);
                 mv.addObject("usuarios", usuariosFiltroNome);
             }
@@ -168,4 +162,21 @@ public class AdministradorController {
         }
         return mv;
     }
+
+    @GetMapping(value = "/servicos")
+    public ModelAndView servicos(@RequestParam(required = false) String servicoBuscar) {
+        ModelAndView mv = new ModelAndView("servicosAdmin");
+        try {
+            if (servicoBuscar == null) {
+                List<Servico> servicos = servicoService.findAll();
+                mv.addObject("servicos", servicos);
+            } else {
+                List<Servico> servicosFiltroNome = servicoService.findByFilterService(servicoBuscar);
+                mv.addObject("servicos", servicosFiltroNome);
+            }
+        } catch (Exception ex) {
+            mv.addObject("errorMessage", "Serviço não encontrado");
+        }
+        return mv;
     }
+}
