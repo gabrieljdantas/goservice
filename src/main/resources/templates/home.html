@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content}, ~{::#footer})">
 <head>
     <title>GoService | Home</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" media="screen" />
@@ -156,11 +156,11 @@
     </div>
 
     </div>
-
-
-
-    <footer th:replace="fragments/footer :: footer"></footer>
 </main>
+
+<footer id="footer">
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
 
 </body>
 </html>

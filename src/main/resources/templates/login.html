@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content}, ~{::#footer})">
 <head>
     <title>Login | GoService</title>
 </head>
@@ -36,6 +36,9 @@
         </div>
     </div>
 </main>
+
+<footer id="footer">
+</footer>
 
 </body>
 </html>
