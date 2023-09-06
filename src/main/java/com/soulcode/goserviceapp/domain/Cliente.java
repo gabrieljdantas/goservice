@@ -13,16 +13,6 @@ public class Cliente extends Usuario{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     private String telefone;
     @Column(length = 14)
     private String cpf;

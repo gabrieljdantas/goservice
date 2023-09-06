@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function() {
+ var histMensagens = document.querySelector(".hist-mensagens");
+ histMensagens.scrollTop = histMensagens.scrollHeight;
+});
+
 var dataAtual = new Date().toISOString().split('T')[0];
 document.getElementById("data").min = dataAtual;
 

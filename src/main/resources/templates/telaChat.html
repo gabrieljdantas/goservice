@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content}, ~{::#footer})">
+<head>
+    <title>Chat | GoService</title>
+</head>
+<body>
+
+<div id="content">
+    <div th:replace="fragments/header :: header"></div>
+
+    <div id="chat-container">
+        <h1>BEM VINDO AO CHAT!</h1>
+
+        <div class="hist-mensagens">
+            <ul>
+                <li th:each="mensagem : ${mensagens}" th:text="${mensagem.mensagem}" th:class="${mensagem.usuarioEnvio == 'cliente' ? 'alert alert-primary' : 'alert alert-secondary'}"></li>
+            </ul>
+        </div>
+
+
+        <form th:action="@{/cliente/historico/mensagens/enviarMensagem}" method="post">
+            <input type="hidden" th:value="${agendamento.id}" name="agendamentoId">
+            <textarea class="form-control" name="conteudo" rows="1" placeholder="Digite sua mensagem" required></textarea>
+            <button id="send-button" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+
+<footer id="footer">
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+
+
+
+</body>
+</html>

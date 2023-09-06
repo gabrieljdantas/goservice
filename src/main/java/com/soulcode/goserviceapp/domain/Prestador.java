@@ -17,16 +17,6 @@ public class Prestador extends Usuario{
 
     private String descricao;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Min(value = 10, message = "O valor minimo de taxa cobrada por hora é 10.")
     private Float taxaPorHora;
 

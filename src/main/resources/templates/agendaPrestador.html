@@ -41,6 +41,7 @@
                         <th>Status</th>
                         <th>Cancelar</th>
                         <th>Confirmar</th>
+                        <th>Contato</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,6 +60,14 @@
                             <button class="btn btn-primary" style="width: 8rem" th:disabled="${not agendamento.isConfirmable()}" data-bs-toggle="modal" th:data-bs-target="'#confirmModal' + ${agendamento.id}">
                                 Confirmar <i class="bi bi-check-square-fill ms-2"></i>
                             </button>
+                        </td>
+                        <td>
+                            <a th:href="@{'/prestador/agenda/mensagens/' + ${agendamento.id}}"
+                               th:class="${not agendamento.isRealizable() ? 'desabilitado' : ''}">
+                                <button class="btn btn-primary" style="width: 8rem" th:disabled="${not agendamento.isRealizable()}">
+                                    Chat <i class="bi bi-chat-dots-fill"></i>
+                                </button>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
