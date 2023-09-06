@@ -4,15 +4,22 @@ import com.soulcode.goserviceapp.domain.Agendamento;
 import com.soulcode.goserviceapp.domain.Servico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
+
     List<Agendamento> findByDataBetween(LocalDate dataInicio, LocalDate dataFim);
+
+    @Query(value = "SELECT a.* FROM agendamentos a " +
+            "JOIN usuarios u ON u.id = a.cliente_id " +
+            "WHERE (a.data BETWEEN ? AND ?) AND u.email = ?", nativeQuery = true)
+    List<Agendamento> findByDataBetweenCliente(LocalDate dataInicio, LocalDate dataFim, String email);
 
     @Query(value="SELECT a.* FROM agendamentos a JOIN usuarios u ON a.cliente_id = u.id WHERE u.email = ? ORDER BY data", nativeQuery = true)
     List<Agendamento> findByClienteEmail(String email);

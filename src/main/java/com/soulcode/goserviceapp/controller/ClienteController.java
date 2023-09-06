@@ -12,6 +12,7 @@ import com.soulcode.goserviceapp.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -102,18 +105,44 @@ public class ClienteController {
         return "redirect:/cliente/historico";
     }
 
+//    @GetMapping(value = "/historico")
+//    public ModelAndView historico(Authentication authentication) {
+//        ModelAndView mv = new ModelAndView("historicoCliente");
+//        try {
+//            List<Agendamento> agendamentos = agendamentoService.findByCliente(authentication);
+//            mv.addObject("agendamentos", agendamentos);
+//        } catch (UsuarioNaoAutenticadoException | UsuarioNaoEncontradoException ex) {
+//            mv.addObject("errorMessage", ex.getMessage());
+//        } catch (Exception ex) {
+//            mv.addObject("errorMessage", "Erro ao carregar dados de agendamentos.");
+//        }
+//        return mv;
+//    }
+
     @GetMapping(value = "/historico")
-    public ModelAndView historico(Authentication authentication) {
+    public ModelAndView historico(
+            @RequestParam(value = "dataInicio", required = false) LocalDate dataInicio ,
+            @RequestParam(value = "dataFim", required = false) LocalDate dataFim,
+            Authentication authentication)
+             {
         ModelAndView mv = new ModelAndView("historicoCliente");
-        try {
+        if (dataInicio == null) {
             List<Agendamento> agendamentos = agendamentoService.findByCliente(authentication);
             mv.addObject("agendamentos", agendamentos);
-        } catch (UsuarioNaoAutenticadoException | UsuarioNaoEncontradoException ex) {
-            mv.addObject("errorMessage", ex.getMessage());
-        } catch (Exception ex) {
-            mv.addObject("errorMessage", "Erro ao carregar dados de agendamentos.");
+
+            return mv;
+        }else {
+            try {
+                List<Agendamento> agendamentos = agendamentoService.findByDataBetweenCliente(authentication, dataInicio, dataFim);
+                mv.addObject("agendamentos", agendamentos);
+            }catch (UsuarioNaoAutenticadoException | UsuarioNaoEncontradoException ex) {
+                mv.addObject("errorMessage", ex.getMessage());
+            }catch (Exception ex) {
+                mv.addObject("errorMessage", ex.getMessage());
+                ex.printStackTrace();
+            }
+            return mv;
         }
-        return mv;
     }
 
     @PostMapping(value = "/historico/cancelar")
