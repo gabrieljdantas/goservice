@@ -1,8 +1,10 @@
 package com.soulcode.goserviceapp.controller;
 
+import com.soulcode.goserviceapp.domain.AgendamentoLog;
 import com.soulcode.goserviceapp.domain.Servico;
 import com.soulcode.goserviceapp.domain.Usuario;
 import com.soulcode.goserviceapp.domain.UsuarioLog;
+import com.soulcode.goserviceapp.service.AgendamentoLogService;
 import com.soulcode.goserviceapp.service.ServicoService;
 import com.soulcode.goserviceapp.service.UsuarioLogService;
 import com.soulcode.goserviceapp.service.UsuarioService;
@@ -19,6 +21,8 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdministradorController {
+    @Autowired
+    private AgendamentoLogService agendamentoLogService;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -150,12 +154,14 @@ public class AdministradorController {
         try {
             List<UsuarioLog> logsAuth = usuarioLogService.findAll();
             mv.addObject("logsAuth", logsAuth);
+
+            List<AgendamentoLog> logsAgendamento = agendamentoLogService.findAll();
+            mv.addObject("logsAgendamento", logsAgendamento);
         } catch (Exception ex) {
             mv.addObject("errorMessage", "Erro ao buscar dados de log de autenticação.");
         }
         return mv;
     }
-
 
     @GetMapping(value = "/usuarios")
     public ModelAndView usuarios(@RequestParam(required = false) String nomeBuscar) {
