@@ -25,7 +25,6 @@ public class Endereco {
         this.uf = uf;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }

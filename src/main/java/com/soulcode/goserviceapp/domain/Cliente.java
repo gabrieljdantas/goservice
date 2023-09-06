@@ -12,10 +12,6 @@ public class Cliente extends Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-
-    @OneToOne
-    private Endereco endereco;
 
     @Override
     public Long getId() {
@@ -25,24 +21,6 @@ public class Cliente extends Usuario{
     @Override
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Override
-    public String getNome() {
-        return nome;
-    }
-
-    @Override
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 
     private String telefone;
