@@ -1,16 +1,12 @@
 package com.soulcode.goserviceapp.controller;
 
-import com.soulcode.goserviceapp.domain.AgendamentoLog;
-import com.soulcode.goserviceapp.domain.Servico;
-import com.soulcode.goserviceapp.domain.Usuario;
-import com.soulcode.goserviceapp.domain.UsuarioLog;
-import com.soulcode.goserviceapp.service.AgendamentoLogService;
-import com.soulcode.goserviceapp.service.ServicoService;
-import com.soulcode.goserviceapp.service.UsuarioLogService;
-import com.soulcode.goserviceapp.service.UsuarioService;
+import com.soulcode.goserviceapp.domain.*;
+import com.soulcode.goserviceapp.service.*;
 import com.soulcode.goserviceapp.service.exceptions.ServicoNaoEncontradoException;
+import com.soulcode.goserviceapp.service.exceptions.UsuarioNaoAutenticadoException;
 import com.soulcode.goserviceapp.service.exceptions.UsuarioNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +28,9 @@ public class AdministradorController {
 
     @Autowired
     private UsuarioLogService usuarioLogService;
+
+    @Autowired
+    private AdministradorService administradorService;
 
     public int verificaPagina(Integer page){
         if (page == null){
@@ -184,6 +183,34 @@ public class AdministradorController {
             ex.printStackTrace();
         }
         return mv;
+    }
+
+
+    @GetMapping(value = "/dados")
+    public ModelAndView dados(Authentication authentication) {
+        ModelAndView mv = new ModelAndView("dadosAdmin");
+        try {
+            Administrador administrador = administradorService.findAuthenticated(authentication);
+            mv.addObject("administrador", administrador);
+        } catch (UsuarioNaoAutenticadoException | UsuarioNaoEncontradoException ex) {
+            mv.addObject("errorMessage", ex.getMessage());
+        } catch (Exception ex) {
+            mv.addObject("errorMessage", "Erro ao buscar dados do cliente.");
+        }
+        return mv;
+    }
+
+    @PostMapping(value = "/dados")
+    public String alterarDados(Administrador administrador, RedirectAttributes attributes) {
+        try {
+            administradorService.update(administrador);
+            attributes.addFlashAttribute("successMessage", "Dados alterados.");
+        } catch (UsuarioNaoEncontradoException ex) {
+            attributes.addFlashAttribute("errorMessage", ex.getMessage());
+        } catch (Exception ex) {
+            attributes.addFlashAttribute("errorMessage", "Erro ao alterar dados cadastrais.");
+        }
+        return "redirect:/admin/dados";
     }
 
 }
