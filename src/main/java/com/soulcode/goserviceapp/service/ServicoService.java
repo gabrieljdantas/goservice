@@ -15,7 +15,7 @@ public class ServicoService {
     @Autowired
     private ServicoRepository servicoRepository;
 
-//    @Cacheable(cacheNames = "redisCache")
+    @Cacheable(cacheNames = "redisCache")
     public List<Servico> findAll(){
         System.err.println("BUSCANDO NO BANCO DE DADOS...");
         return servicoRepository.findAll();
@@ -61,11 +61,9 @@ public class ServicoService {
         return servicoRepository.countTotalServicos();
     }
 
-    public List<Servico> findByFilterService(String nome) {
-        List<Servico> servicos = servicoRepository.findByFilterService(nome);
-        if (servicos.isEmpty()) {
-            throw new ServicoNaoEncontradoException("Serviço não encontrado");
-        }
+    public List<Servico> findByFilterService(String nome, int page, int pageSize) {
+        int offset = page * pageSize;
+        List<Servico> servicos = servicoRepository.findByFilterService(nome, pageSize, offset);
         return servicos;
     }
 }

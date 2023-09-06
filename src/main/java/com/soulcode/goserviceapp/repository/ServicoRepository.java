@@ -29,9 +29,8 @@ public interface ServicoRepository extends JpaRepository<Servico, Long> {
     @Query(value = "SELECT COUNT(*) FROM servicos", nativeQuery = true)
     long countTotalServicos();
 
-    @Query(value = "SELECT * " +
-            " FROM servicos" + " WHERE nome LIKE ?%", nativeQuery = true)
-    List<Servico> findByFilterService(String nome);
+    @Query(value = "SELECT s.* FROM servicos s WHERE nome LIKE CONCAT('%', :nome, '%') LIMIT :pageSize OFFSET :offset", nativeQuery = true)
+    List<Servico> findByFilterService(@Param("nome") String nome, @Param("pageSize") int pageSize, @Param("offset") int offset);
 }
 
 

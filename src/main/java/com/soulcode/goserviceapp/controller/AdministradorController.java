@@ -29,18 +29,31 @@ public class AdministradorController {
     @Autowired
     private UsuarioLogService usuarioLogService;
 
-    @GetMapping(value = "/servicos/{page}")
-    public ModelAndView servicos(@PathVariable(name = "page", required = false) Integer page) {
+    @GetMapping(value = "/servicos")
+    public ModelAndView servicos(@RequestParam(name = "page", required = false) Integer page, @RequestParam(name = "servicoBuscar", required = false) String servicoBuscar) {
         ModelAndView mv = new ModelAndView("servicosAdmin");
         try {
+            System.out.println("Entrou aqui");
             int pageSize = 10;
+            if (page == null){
+                page = 0;
+            }
             long totalServicos = servicoService.countTotalServicos();
             int totalPages = (int) Math.ceil((double) totalServicos / pageSize);
-            System.out.println(totalPages);
-            List<Servico> servicos = servicoService.findAll(page, pageSize);
-            mv.addObject("servicos", servicos);
-            mv.addObject("currentPage", page);
-            mv.addObject("totalPages", totalPages);
+            mv.addObject("search", servicoBuscar);
+            if (servicoBuscar == null) {
+                System.out.println(totalPages);
+                List<Servico> servicos = servicoService.findAll(page, pageSize);
+                mv.addObject("servicos", servicos);
+                mv.addObject("currentPage", page);
+                mv.addObject("totalPages", totalPages);
+            } else {
+                List<Servico> servicosFiltroNome = servicoService.findByFilterService(servicoBuscar, page, pageSize);
+                mv.addObject("servicos", servicosFiltroNome);
+                mv.addObject("currentPage", page);
+                mv.addObject("totalPages", totalPages);
+            }
+
         } catch (Exception ex) {
             mv.addObject("errorMessage", "Erro ao paginar serviços");
         }
@@ -163,20 +176,4 @@ public class AdministradorController {
         return mv;
     }
 
-    @GetMapping(value = "/servicos")
-    public ModelAndView servicos(@RequestParam(required = false) String servicoBuscar) {
-        ModelAndView mv = new ModelAndView("servicosAdmin");
-        try {
-            if (servicoBuscar == null) {
-                List<Servico> servicos = servicoService.findAll();
-                mv.addObject("servicos", servicos);
-            } else {
-                List<Servico> servicosFiltroNome = servicoService.findByFilterService(servicoBuscar);
-                mv.addObject("servicos", servicosFiltroNome);
-            }
-        } catch (Exception ex) {
-            mv.addObject("errorMessage", "Serviço não encontrado");
-        }
-        return mv;
-    }
 }
