@@ -14,7 +14,6 @@ public class Prestador extends Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
 
     private String descricao;
 
@@ -26,16 +25,6 @@ public class Prestador extends Usuario{
     @Override
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Override
-    public String getNome() {
-        return nome;
-    }
-
-    @Override
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     @Min(value = 10, message = "O valor minimo de taxa cobrada por hora é 10.")
