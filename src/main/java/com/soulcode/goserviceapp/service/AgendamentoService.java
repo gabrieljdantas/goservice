@@ -40,6 +40,8 @@ public class AgendamentoService {
         throw new AgendamentoNaoEncontradoException();
     }
 
+
+
     public Agendamento create(Authentication authentication, Long servicoId, Long prestadorId, LocalDate data, LocalTime hora){
         Cliente cliente = clienteService.findAuthenticated(authentication);
         Prestador prestador = prestadorService.findById(prestadorId);
@@ -53,14 +55,21 @@ public class AgendamentoService {
 
         return agendamentoRepository.save(agendamento);
     }
-//    @Cacheable(cacheNames = "redisCache")
+    @Cacheable(cacheNames = "redisCache")
     public List<Agendamento> findByCliente(Authentication authentication){
         System.err.println("BUSCANDO AGENDAMENTOS CLIENTE NO BANCO...");
         Cliente cliente = clienteService.findAuthenticated(authentication);
         return agendamentoRepository.findByClienteEmail(cliente.getEmail());
     }
-//
-//    @Cacheable(cacheNames = "redisCache")
+
+    @Cacheable(cacheNames = "redisCache")
+    public List<Agendamento> findByDataBetweenCliente(Authentication authentication, LocalDate dataInicio, LocalDate dataFim){
+        System.err.println("BUSCANDO AGENDAMENTOS CLIENTE NO BANCO...");
+        List<Agendamento> agendamentos = agendamentoRepository.findByDataBetweenCliente(dataInicio, dataFim, authentication.getName());
+        return agendamentos;
+    }
+
+    @Cacheable(cacheNames = "redisCache")
     public List<Agendamento> findByPrestador(Authentication authentication){
         System.err.println("BUSCANDO AGENDAMENTOS PRESTADOR NO BANCO...");
         Prestador prestador = prestadorService.findAuthenticated(authentication);

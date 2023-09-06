@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content}, ~{::#footer})">
 <head>
     <title>Histórico de Agendamento | GoService</title>
 </head>
@@ -16,6 +16,16 @@
 
                 <div th:if="${successMessage != null}" th:text="${successMessage}" class="alert alert-success" role="alert"></div>
                 <div th:if="${errorMessage != null}" th:text="${errorMessage}" class="alert alert-danger" role="alert"></div>
+
+                <form th:action="@{/cliente/historico}" method="get">
+                    <label for="dataInicio">Data de Início:</label>
+                    <input type="date" id="dataInicio" name="dataInicio" required>
+
+                    <label for="dataFim">Data de Fim:</label>
+                    <input type="date" id="dataFim" name="dataFim" required>
+
+                    <button type="submit">Filtrar</button>
+                </form>
 
                 <table class="table w-100">
                     <thead>
@@ -93,7 +103,6 @@
         </div>
     </div>
 </div>
-
 <footer id="footer">
     <div th:replace="fragments/footer :: footer"></div>
 </footer>
