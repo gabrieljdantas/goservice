@@ -1,23 +1,17 @@
 package com.soulcode.goserviceapp.controller;
 
-import com.soulcode.goserviceapp.domain.Agendamento;
-import com.soulcode.goserviceapp.domain.Prestador;
-import com.soulcode.goserviceapp.domain.Servico;
-import com.soulcode.goserviceapp.service.AgendamentoService;
-import com.soulcode.goserviceapp.service.PrestadorService;
-import com.soulcode.goserviceapp.service.ServicoService;
+import com.soulcode.goserviceapp.domain.*;
+import com.soulcode.goserviceapp.domain.enums.StatusAgendamento;
+import com.soulcode.goserviceapp.service.*;
 import com.soulcode.goserviceapp.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -32,6 +26,9 @@ public class PrestadorController {
 
     @Autowired
     private AgendamentoService agendamentoService;
+
+    @Autowired
+    private MensagemService mensagemService;
 
     @GetMapping(value = "/dados")
     public ModelAndView dados(Authentication authentication) {
@@ -142,5 +139,55 @@ public class PrestadorController {
             attributes.addFlashAttribute("errorMessage", "Erro ao confirmar agendamento.");
         }
         return "redirect:/prestador/agenda";
+    }
+
+    @GetMapping("/agenda/mensagens/{id}")
+    public ModelAndView exibirChat(@PathVariable Long id,
+                                   Authentication authentication,
+                                   RedirectAttributes attributes) {
+        ModelAndView model = new ModelAndView("telaChatPrestador");
+        Prestador prestador = prestadorService.findAuthenticated(authentication);
+        List<Mensagem> mensagens = mensagemService.findByAgendamentoId(id);
+
+        Agendamento agendamento = agendamentoService.findById(id);
+
+        if (agendamento != null && agendamento.getPrestador().getId().equals(prestador.getId())) {
+            if (StatusAgendamento.CONFIRMADO.equals(agendamento.getStatusAgendamento())) {
+                model.addObject("agendamento", agendamento);
+                model.addObject("mensagens", mensagens);
+            } else {
+                attributes.addFlashAttribute("errorMessage", "O chat desse agendamento não pode ser acessado!");
+                model.setViewName("redirect:/prestador/agenda");
+            }
+        } else {
+            attributes.addFlashAttribute("errorMessage", "Você não tem acesso a esse chat de agendamento!");
+            model.setViewName("redirect:/prestador/agenda");
+        }
+        return model;
+    }
+
+    @PostMapping(value = "/agenda/mensagens/enviarMensagem")
+    public String enviarMensagem(
+            @RequestParam Long agendamentoId,
+            @RequestParam String conteudo,
+            RedirectAttributes attributes) {
+        Agendamento agendamento = agendamentoService.findById(agendamentoId);
+
+        try {
+            Mensagem mensagem = new Mensagem();
+            mensagem.setAgendamento(agendamento);
+            mensagem.setCliente(agendamento.getCliente());
+            mensagem.setPrestador(agendamento.getPrestador());
+            mensagem.setMensagem(conteudo);
+            mensagem.setUsuarioEnvio("prestador");
+            mensagem.setDataHoraMensagem(LocalDateTime.now());
+
+            mensagemService.create(mensagem);
+            return "redirect:/prestador/agenda/mensagens/" + agendamentoId;
+
+        } catch (Exception ex){
+            attributes.addFlashAttribute("errorMessage", "Erro ao enviar mensagem");
+            return "redirect:/prestador/agenda/mensagens/" + agendamentoId;
+        }
     }
 }
