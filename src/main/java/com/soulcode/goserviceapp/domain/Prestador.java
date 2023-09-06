@@ -38,17 +38,6 @@ public class Prestador extends Usuario{
         this.nome = nome;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    @OneToOne
-    private Endereco endereco;
-
     @Min(value = 10, message = "O valor minimo de taxa cobrada por hora é 10.")
     private Float taxaPorHora;
 

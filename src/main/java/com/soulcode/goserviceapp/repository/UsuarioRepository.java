@@ -30,4 +30,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "SELECT * " +
             " FROM usuarios" + " WHERE nome LIKE ?%", nativeQuery = true)
     List<Usuario> findByFilterName(String nome);
+
+    @Query(value = "SELECT * FROM usuarios ORDER BY id LIMIT 10 OFFSET ((@pageNumber - 1) * 10)", nativeQuery = true)
+    List<Usuario> findLimited();
 }
