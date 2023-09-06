@@ -33,20 +33,24 @@ public class AdministradorController {
     @Autowired
     private UsuarioLogService usuarioLogService;
 
+    public int verificaPagina(Integer page){
+        if (page == null){
+            page = 0;
+            return page;
+        }
+        return page;
+    }
+
     @GetMapping(value = "/servicos")
     public ModelAndView servicos(@RequestParam(name = "page", required = false) Integer page, @RequestParam(name = "servicoBuscar", required = false) String servicoBuscar) {
         ModelAndView mv = new ModelAndView("servicosAdmin");
         try {
-            System.out.println("Entrou aqui");
             int pageSize = 10;
-            if (page == null){
-                page = 0;
-            }
+            page = verificaPagina(page);
             long totalServicos = servicoService.countTotalServicos();
             int totalPages = (int) Math.ceil((double) totalServicos / pageSize);
             mv.addObject("search", servicoBuscar);
             if (servicoBuscar == null) {
-                System.out.println(totalPages);
                 List<Servico> servicos = servicoService.findAll(page, pageSize);
                 mv.addObject("servicos", servicos);
                 mv.addObject("currentPage", page);
@@ -57,7 +61,6 @@ public class AdministradorController {
                 mv.addObject("currentPage", page);
                 mv.addObject("totalPages", totalPages);
             }
-
         } catch (Exception ex) {
             mv.addObject("errorMessage", "Erro ao paginar serviços");
         }
@@ -178,6 +181,7 @@ public class AdministradorController {
 
         } catch (Exception ex) {
             mv.addObject("errorMessage", "Erro ao buscar dados de usuários.");
+            ex.printStackTrace();
         }
         return mv;
     }

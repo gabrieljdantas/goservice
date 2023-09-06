@@ -21,6 +21,7 @@ public class ServicoService {
         return servicoRepository.findAll();
     }
 
+    @Cacheable(cacheNames = "redisCache")
     public List<Servico> findAll(int page, int pageSize){
         int offset = page * pageSize;
         System.err.println("BUSCANDO NO BANCO DE DADOS PAGINADO...");
