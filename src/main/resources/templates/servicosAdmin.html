@@ -51,7 +51,7 @@
         </div>
 
         <div class="card w-100 mt-5">
-            <form method="get" th:action="@{/admin/servicos}">
+            <form method="get" th:action="@{/admin/servicos?page=' + ${currentPage}}">
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="servicoBuscar" class="form-label" style="font-weight: bold">Go Service Connect: Explore e encontre nossos Serviços</label>
@@ -67,12 +67,20 @@
 
                 <nav aria-label="...">
                     <ul class="pagination">
-                        <li class="page-item" th:class="${currentPage > 0} ? '' : 'disabled'">
-                            <a class="page-link" th:href="'/admin/servicos/' + ${currentPage - 1}">Previous</a>
+                        <li class="page-item">
+                            <form method="get" th:action="@{/admin/servicos}" th:class="${currentPage > 0} ? '' : 'disabled'">
+                                <input type="hidden" name="page" th:value="${currentPage - 1}">
+                                <input type="hidden" name="servicoBuscar" th:value="${search}">
+                                <button class="page-link">Previous</button>
+                            </form>
                         </li>
 
-                        <li class="page-item" th:class="${currentPage >= totalPages - 1} ? 'disabled' : ''">
-                            <a class="page-link" th:href="'/admin/servicos/' + ${currentPage + 1}">Next</a>
+                        <li class="page-item">
+                            <form method="get" th:action="@{/admin/servicos}" th:class="${currentPage >= totalPages - 2} ? 'disabled' : ''">
+                                <input type="hidden" name="page" th:value="${currentPage + 1}">
+                                <input type="hidden" name="servicoBuscar" th:value="${search}">
+                                <button class="page-link">Next</button>
+                            </form>
                         </li>
                     </ul>
                 </nav>
